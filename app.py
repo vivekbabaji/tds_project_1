@@ -23,7 +23,7 @@ logger = logging.getLogger(__name__)
 
 # Constants
 DB_PATH = "knowledge_base.db"
-SIMILARITY_THRESHOLD = 0.8  # Lowered threshold for better recall
+SIMILARITY_THRESHOLD = 0.4  # Lowered threshold for better recall
 MAX_RESULTS = 10  # Increased to get more context
 load_dotenv()
 MAX_CONTEXT_CHUNKS = 4  # Increased number of chunks per source
@@ -210,9 +210,9 @@ async def find_similar_content(query_embedding, conn):
                 if similarity >= SIMILARITY_THRESHOLD:
                     # Ensure URL is properly formatted
                     url = chunk["url"]
-                    if not url.startswith("http"):
-                        # Fix missing protocol
-                        url = f"https://discourse.onlinedegree.iitm.ac.in/t/{url}"
+                    # if not url.startswith("http"):
+                    #     # Fix missing protocol
+                    #     url = f"https://discourse.onlinedegree.iitm.ac.in/t/{url}"
                     
                     results.append({
                         "source": "discourse",
